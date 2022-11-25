@@ -58,14 +58,15 @@
                         <img class="rounded-circle me-2" src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                              width="40" alt="imagem-ilustrativa">
                         <div class="w-100">
-                          <input class="form-control ml-1 shadow-none textarea mb-2" type="text">
-                          <textarea
+                          <input v-model="name" class="form-control ml-1 shadow-none textarea mb-2" type="text">
+                          <textarea v-model="message"
                               class="form-control ml-1 shadow-none textarea">
                           </textarea>
                         </div>
                       </div>
                       <div class="mt-2 text-right ms-4">
-                        <button class="btn ms-4 btn-primary btn-sm shadow-none" type="button">Postar Comentário
+                        <button v-on:click="addComment" class="btn ms-4 btn-primary btn-sm shadow-none" type="button">
+                          Postar Comentário
                         </button>
                       </div>
                     </div>
@@ -118,12 +119,20 @@
         `,
         data() {
             return {
-                comments: [
-                    {
-                        name: 'Léo',
-                        message: 'Lorem Ipsum',
-                    }
-                ]
+                comments: [],
+                name: '',
+                message: '',
+            }
+        },
+        methods: {
+            addComment() {
+                this.comments.push({
+                    name: this.name,
+                    message: this.message
+                })
+
+                this.name = '';
+                this.message = '';
             }
         }
     })
